@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+#数据库
+spring:
+  datasource:
+    username: root
+    password: mysql123
+    url: jdbc:mysql://192.168.43.201:3306/shares?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    tomcat:
+      max-active: 10
+      min-idle: 5
+      initial-size: 5
+#themleaf
+  thymeleaf:
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    mode: HTML5
+#mybatis
+mybatis:
+  type-aliases-package: com.hand.sharesinfo.model
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mybatis/mapper/*.xml

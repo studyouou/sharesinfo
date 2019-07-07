@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hand.sharesinfo.mapper.ShareHostoryMapper">
+    <select id="getNumOver5" resultType="int">
+         select count(*)
+         from ${share.hangyecode}
+         where
+         code=${share.code}
+    </select>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from ${hangyecode}
+        where code=#{code}
+    </select>
+    <select id="getShireHostoryByLimit" resultType="com.hand.sharesinfo.model.ShareHistory">
+        select id,name,price,zhangfu,time from (
+        select s.id,s.name,s.price,s.zhangfu,s.time,s.month,s.day
+        from ${hangyecode} s
+        where
+        code = #{code}) mm
+        limit #{offset},#{limit}
+    </select>
+</mapper>

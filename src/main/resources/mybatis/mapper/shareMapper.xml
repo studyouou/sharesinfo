@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hand.sharesinfo.mapper.SharesMapper">
+    <sql id="share_colunm">
+        s.code,s.hangyecode,s.name,s.nowPrice
+    </sql>
+    <select id="getShare" parameterType="string">
+        select <include refid="share_colunm"></include>
+        from shares s
+        where id=#{code}
+    </select>
+    <select id="getSharesByLimit" resultType="com.hand.sharesinfo.model.Share">
+        select <include refid="share_colunm"></include>
+        from  shares s
+        limit #{offset},#{limit}
+    </select>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from
+        shares
+    </select>
+    <select id="getSizeByLimit">
+        select count(*)
+        from shares s
+        limit #{offset},@{limit};
+    </select>
+    <update id="updateShare" parameterType="com.hand.sharesinfo.model.Share">
+        update shares
+        set
+        hangye_code=#{share.hangye_code} ,nowPrice=#{share.nowPrice} name=#{share.name} where code=#{share.code}
+    </update>
+    <delete id="deleteShare" parameterType="string">
+        delete
+        from shares
+        where code = {#code}
+    </delete>
+    <insert id="addShare" parameterType="com.hand.sharesinfo.model.Share">
+        insert into
+        shares(code,hangye_code,nowPrice,name)
+         values(shares.code,shares.hangye_code,shares.nowPrice,shares.name)
+    </insert>
+
+</mapper>

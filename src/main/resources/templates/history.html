@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>股票查询系统</title>
+</head>
+<body>
+<center><h1>欢迎使用查询系统</h1></center>
+<center><a th:href="@{/download}">点击下载股票详情</a></center>
+<center> <table style="width: 95%;text-align: center"></center>
+<tr>
+    <td style="margin-left: 15px">时间</td>
+    <td style="margin-left: 15px">价格</td>
+    <td style="margin-left: 15px">涨幅</td>
+</tr>
+<tr th:each="m : ${sharehistorys_list}">
+    <td  th:text="${m.time}" style="margin-left: 15px"></td>
+    <td th:text="${m.price}" style="margin-left: 15px"></td>
+    <td th:text="${m.zhangfu}" style="margin-left: 15px"></td>
+</tr>
+</table>
+<a th:href="@{/sharehistory/toHistory/}+${hangye}+'/'+${code}+'/'+${pre}" th:text="上一页"></a>
+<tr th:each="page : ${pageNum}">
+    <td><a th:href="@{/sharehistory/toHistory/}+${hangye}+'/'+${code}+'/'+${page}" th:text="${page}"></a></td>
+</tr>
+<a th:href="@{/sharehistory/toHistory/}+${hangye}+'/'+${code}+'/'+${next}" th:text="下一页"></a>
+</body>
+</html>
