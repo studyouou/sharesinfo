@@ -9,4 +9,6 @@ import java.util.List;
 public interface ShareServiceImpl {
     public List<Share> getPageShares(Page page);
     public int getCount();
+    public List<Share> getAllShare();
+    public boolean updateSharePrice(Share share);
 }

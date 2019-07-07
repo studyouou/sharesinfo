@@ -15,4 +15,7 @@
         <!-- 打印查询语句 打印mybatis日志-->
         <setting name="logImpl" value="STDOUT_LOGGING" />
     </settings>
+    <plugins>
+        <plugin interceptor="com.hand.sharesinfo.intercept.mybatis.GetOver5Interceptor"></plugin>
+    </plugins>
 </configuration>

@@ -14,7 +14,5 @@ public class ShareHistory {
     private String name;
     private Double price;
     private Double zhangfu;
-    private String time;
-    private int month;
-    private int day;
+    private int time;
 }

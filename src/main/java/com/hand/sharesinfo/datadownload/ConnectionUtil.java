@@ -35,12 +35,22 @@ public class ConnectionUtil {
     }
 
     public static Connection getConnection(){
+        boolean flag = false;
+        Connection connection = null;
         try {
-            Connection connection = druidDataSource.getConnection();
-            return connection;
+            while (!flag){
+                connection = druidDataSource.getConnection();
+                flag=true;
+            }
         } catch (SQLException e) {
-            throw new RuntimeException("/获取连接失败");
+            System.out.println("获取连接失败,重新获取中");
+            try {
+                Thread.sleep(60000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
         }
+        return connection;
     }
     public static void close(){
         druidDataSource.close();

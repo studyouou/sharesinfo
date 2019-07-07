@@ -1,9 +1,11 @@
 package com.hand.sharesinfo.controller;
 
+import com.hand.sharesinfo.mapper.SharesMapper;
 import com.hand.sharesinfo.model.Page;
 import com.hand.sharesinfo.model.Share;
 import com.hand.sharesinfo.model.ShareHistory;
 import com.hand.sharesinfo.service.impl.ShareHistoryServiceImpl;
+import com.hand.sharesinfo.util.DianJiZhangFu;
 import com.hand.sharesinfo.util.PageUtil;
 import com.hand.sharesinfo.util.YeShuUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,18 @@ public class HistorySharesController {
     @Autowired
     private ShareHistoryServiceImpl shareHistoryService;
 
+    @Autowired
+    private DianJiZhangFu dianJiZhangFu;
+
+    @Autowired
+    private SharesMapper sharesMapper;
+
     @RequestMapping("/sharehistory/toHistory/{hangye}/{code}")
-    public String toHistory(HttpServletRequest request,@PathVariable("code") String code,@PathVariable("hangye") String hangye){
+    public String toHistory(HttpServletRequest request,@PathVariable("code") String code,
+                            @PathVariable("hangye") String hangye){
+        Share share = new Share();
+        share.setCode(code);
+        dianJiZhangFu.setShare(share);
         return tianZhuan(request,1,code,hangye);
     }
 

@@ -10,6 +10,10 @@
         from shares s
         where id=#{code}
     </select>
+    <select id="getAllShare" resultType="com.hand.sharesinfo.model.Share">
+        select *
+        from shares
+    </select>
     <select id="getSharesByLimit" resultType="com.hand.sharesinfo.model.Share">
         select <include refid="share_colunm"></include>
         from  shares s
@@ -25,10 +29,11 @@
         from shares s
         limit #{offset},@{limit};
     </select>
-    <update id="updateShare" parameterType="com.hand.sharesinfo.model.Share">
+    <update id="updateSharePrice" parameterType="com.hand.sharesinfo.model.Share">
         update shares
-        set
-        hangye_code=#{share.hangye_code} ,nowPrice=#{share.nowPrice} name=#{share.name} where code=#{share.code}
+        set nowPrice=#{share.nowPrice}
+        where
+        code=#{share.code}
     </update>
     <delete id="deleteShare" parameterType="string">
         delete

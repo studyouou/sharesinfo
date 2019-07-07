@@ -39,7 +39,7 @@ public class ShareHistoryService implements ShareHistoryServiceImpl {
     public List<ShareZhangFu> showZhangfu(List<Share> share_list) {
         List<ShareZhangFu> zhangfu_list = new ArrayList<ShareZhangFu>();
         for (Share share:share_list){
-            int cishu = shareHostoryMapper.getNumOver5(share);
+            int cishu = shareHostoryMapper.getNumOver5(share,60,0.05);
             ShareZhangFu zhangFu = new ShareZhangFu();
             zhangFu.setName(share.getName());
             zhangFu.setCode(share.getCode());

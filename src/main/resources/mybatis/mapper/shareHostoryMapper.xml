@@ -6,7 +6,7 @@
          select count(*)
          from ${share.hangyecode}
          where
-         code=${share.code}
+         code=#{share.code}
     </select>
     <select id="getCount" resultType="int">
         select count(*)
@@ -15,10 +15,11 @@
     </select>
     <select id="getShireHostoryByLimit" resultType="com.hand.sharesinfo.model.ShareHistory">
         select id,name,price,zhangfu,time from (
-        select s.id,s.name,s.price,s.zhangfu,s.time,s.month,s.day
+        select s.id,s.name,s.price,s.zhangfu,s.time
         from ${hangyecode} s
         where
         code = #{code}) mm
         limit #{offset},#{limit}
     </select>
+
 </mapper>

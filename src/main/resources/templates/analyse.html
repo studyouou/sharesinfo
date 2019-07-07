@@ -11,20 +11,18 @@
 <tr>
     <td style="margin-left: 15px">股票代码</td>
     <td style="margin-left: 15px">名字</td>
-    <td style="margin-left: 15px">目前价格</td>
-    <td style="margin-left: 15px">历史记录查看</td>
+    <td style="margin-left: 15px">30天涨幅>5%次数</td>
 </tr>
-<tr th:each="m : ${shares_list}">
+<tr th:each="m : ${zhangfu_list}">
     <td  th:text="${m.code}" style="margin-left: 15px"></td>
-    <td th:text="${m.name}" style="margin-left: 15px"></td>
-    <td th:text="${m.nowPrice}" style="margin-left: 15px"></td>
-    <td ><a th:href="@{/sharehistory/toHistory/}+${m.hangyecode}+'/'+${m.code}" style="margin-left: 15px">查看</a></td>
+    <td  th:text="${m.name}" style="margin-left: 15px"></td>
+    <td th:text="${m.cishu}" style="margin-left: 15px"></td>
 </tr>
 </table>
-<a th:href="@{/shares/}+${pre}" th:text="上一页"></a>
+<a th:href="@{/shares/zhangfu/}+${pre}" th:text="上一页"></a>
 <tr th:each="page : ${pageNum}">
-    <td><a th:href="@{/shares/}+${page}" th:text="${page}"></a></td>
+    <td><a th:href="@{/shares/zhangfu/}+${page}" th:text="${page}"></a></td>
 </tr>
-<a th:href="@{/shares/}+${next}" th:text="下一页"></a>
+<a th:href="@{/shares/zhangfu/}+${next}" th:text="下一页"></a>
 </body>
 </html>

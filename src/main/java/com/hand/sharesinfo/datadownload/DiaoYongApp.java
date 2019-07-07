@@ -48,10 +48,9 @@ public class DiaoYongApp {
     private static void createTables(List<String> url_list) throws SQLException {
         for (String code : url_list){
             for (int i=2019;i>=2010;i--) {
-                String sql = "create table if not exists " + code+"(id varchar(40) primary key,time varchar(20),code varchar(20) " +
-                        "not null,name varchar(40) not null,price double,zhangfu double,month tinyint not null,day tinyint not null,index index_id(code),index index_day(day)" +
-                        ",index index_month(month)" +
-                        ",index index_code(code))engine=MyISAM CHARACTER SET UTF8";
+                String sql = "create table if not exists " + code+"(id varchar(40) primary key,time int,code varchar(20) " +
+                        "not null,name varchar(40) not null,price double,zhangfu double,index index_id(code),index index_day(time)" +
+                        ")engine=MyISAM CHARACTER SET UTF8";
                 createTable(sql,(code));
             }
         }
@@ -78,7 +77,6 @@ public class DiaoYongApp {
         JSONObject jsonObject = JSON.parseObject(body);
         Map<String,Object> map= jsonObject.getInnerMap();
         map.remove("");
-
         Set<String> entry_set = map.keySet();
         for (String primary: entry_set){
             //将所有行业的code储存到url_list中
@@ -252,13 +250,11 @@ public class DiaoYongApp {
                     String tableName = hang_url;
                     Map<String, Object> parameterMap = new HashMap<String,Object>();
                     parameterMap.put("id",code+tem[0]+tem[1]+tem[2]);
-                    parameterMap.put("time",data);
-                    parameterMap.put("month",tem[1]);
+                    parameterMap.put("time",tem[0]+tem[1]+tem[2]);
                     parameterMap.put("code",code);
                     parameterMap.put("price",trade);
                     parameterMap.put("zhangfu",zhangfu);
                     parameterMap.put("name",name);
-                    parameterMap.put("day",tem[2]);
                     insertData(tableName,parameterMap,true);
                     //记录插入数量
                     StringBuilder writeToFile = new StringBuilder();
@@ -318,7 +314,7 @@ public class DiaoYongApp {
 
     }
 
-    private static Document getDocument(String url, Map<String,String> header) {
+    public static Document getDocument(String url, Map<String,String> header) {
 //        setIpProxy();
         boolean b = false;
         Connection connect = Jsoup.connect(url).timeout(2000);

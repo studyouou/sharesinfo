@@ -56,20 +56,20 @@ public class CommonController {
         Page page = PageUtil.createPage(currentP,count,20);
         List<Share> share_list = shareService.getPageShares(page);
         List<ShareZhangFu> zhangfu_list = shareHistoryService.showZhangfu(share_list);
-        return setAtrAndReturn(request,page,zhangfu_list,"analyse");
+        return setAtrAndReturn(request,page,zhangfu_list,"zhangfu_list","analyse");
     }
 
     private String toTiaoZhuanIndex(int currentPage,HttpServletRequest request,String to) {
         int count = shareService.getCount();
         Page page = PageUtil.createPage(currentPage,count,20);
         List<Share> shares_list = shareService.getPageShares(page);
-        return setAtrAndReturn(request,page,shares_list,to);
+        return setAtrAndReturn(request,page,shares_list,"shares_list",to);
     }
-    private String setAtrAndReturn(HttpServletRequest request,Page page,List shares_list,String to){
+    private String setAtrAndReturn(HttpServletRequest request,Page page,List shares_list,String listName,String to){
         request.setAttribute("pageNum",YeShuUtil.getYeShu(page));
         request.setAttribute("pre",page.isHasPre()?page.getCurrentPage()-1:1);
         request.setAttribute("next",page.isHasNext()?page.getCurrentPage()+1:page.getCountPage());
-        request.setAttribute("shares_list",shares_list);
+        request.setAttribute(listName,shares_list);
         return to;
     }
 }

@@ -13,9 +13,11 @@ public interface ShareHostoryMapper {
      * @Author: OuGen
      * @Discription:
      * @param share 股票
+     * @param day 多少天
+     * @param zhangfu 涨幅判断大小
      * @Data :12:32 2019/7/7
      */
-    public int getNumOver5(@Param("share")Share share);
+    public int getNumOver5(@Param("share")Share share,@Param("size") int size ,@Param("zhangfu") double zhangfu);
 
     /**
      * @Author: OuGen
@@ -25,6 +27,7 @@ public interface ShareHostoryMapper {
      * @param limit 每页大小
      * @Data :12:32 2019/7/7
      */
+
     public List<ShareHistory> getShireHostoryByLimit(@Param("code") String code,@Param("hangyecode") String hangyecode,@Param("offset") int offset,@Param("limit") int limit);
 
     /**

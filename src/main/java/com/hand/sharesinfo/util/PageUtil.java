@@ -29,6 +29,6 @@ public class PageUtil {
     }
 
     private static int getPageCount(int dataCount, int pageSize) {
-        return dataCount/pageSize==0?dataCount/pageSize : dataCount/pageSize+1;
+        return dataCount%pageSize==0?dataCount/pageSize : dataCount/pageSize+1;
     }
 }
