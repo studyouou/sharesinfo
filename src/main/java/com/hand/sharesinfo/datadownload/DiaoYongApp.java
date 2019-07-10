@@ -7,6 +7,7 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,11 +16,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
+@Service
 public class DiaoYongApp {
     static List<IpAdd> ipAdds = new ArrayList<IpAdd>();
     //储存行业以及其股票数量
     static Map<String,Integer> hangyePage = new HashMap<String,Integer>();
-
+    //只能往数据库储存1次
+    public static int i = 0;
     //行业列表
     static List<String> hangye = new ArrayList<String>();
 
@@ -29,15 +32,17 @@ public class DiaoYongApp {
 
     static int count = 0 ;
 
-    public static void main(String[] args) throws IOException, SQLException {
+    public void downLoad() throws IOException, SQLException {
+        System.out.println("开始更新下载数据入库，再次过程可能需要几分钟哟");
         fw = new BufferedWriter(new FileWriter("d:\\handdata\\shares.txt"));
         //获取代理ip
 //        ipAdds = new ProxyIP().getIpAddrs(5);
+        String sql = "create table shares(code varchar(20) primary key,hangyecode varchar(20)" +
+                ",name varchar(40) not null,nowPrice double not null,index index_code(code))engine=InnoDB CHARACTER SET UTF8";
+        System.out.println(sql);
+        createTable(sql,"shares");
         //获取所有行业的coede
         List<String> url_list = getId("http://money.finance.sina.com.cn/q/view/newFLJK.php?param=industry");
-        String sql = "create table if not exists shares(code varchar(20) primary key,hangyecode varchar(20)" +
-                ",name varchar(40) not null,nowPrice double not null,index index_code(code))engine=InnoDB CHARACTER SET UTF8";
-        createTable(sql,"shares");
         createTables(url_list);
         //获取到每个行业的股票code
         getCodeListAndDown(url_list);
@@ -57,7 +62,7 @@ public class DiaoYongApp {
 
     }
 
-    private static void createTable(String createTableSql,String tableName) throws SQLException {
+    public static void createTable(String createTableSql,String tableName) throws SQLException {
         java.sql.Connection connection = ConnectionUtil.getConnection();
         Statement statement = connection.createStatement();
         statement.execute(createTableSql);
@@ -330,7 +335,7 @@ public class DiaoYongApp {
             }
         }
         try {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

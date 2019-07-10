@@ -1,4 +1,4 @@
-package com.hand.sharesinfo.util;
+package com.hand.sharesinfo.toolcomponent;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

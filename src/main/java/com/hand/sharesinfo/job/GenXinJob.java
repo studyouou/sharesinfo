@@ -1,14 +1,16 @@
 package com.hand.sharesinfo.job;
 
-import com.hand.sharesinfo.util.DianJiZhangFu;
+import com.hand.sharesinfo.datadownload.DiaoYongApp;
+import com.hand.sharesinfo.toolcomponent.DianJiZhangFu;
 import com.hand.sharesinfo.model.Share;
 import com.hand.sharesinfo.service.ShareService;
 import com.hand.sharesinfo.service.impl.ShareServiceImpl;
-import com.hand.sharesinfo.util.ApplicationHelper;
+import com.hand.sharesinfo.toolcomponent.ApplicationHelper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.List;
@@ -31,26 +33,33 @@ public class GenXinJob {
     List<Share> shareList = null;
     boolean flag = false;
     public void genxin() {
+
         if (!flag){
+            //自己加载获取bean
             shareService = ApplicationHelper.getBean(ShareService.class);
             dianJiZhangFu = ApplicationHelper.getBean(DianJiZhangFu.class);
+            if (bitset.isEmpty()){
+                shareList= shareService.getAllShare();
+            }
             shareList= shareService.getAllShare();
             for (Share share:shareList){
                 bitset.set(Math.abs(share.getCode().hashCode()));
             }
             flag=true;
         }
-        System.out.println();
         if (bitset.get(Math.abs(dianJiZhangFu.getShare().getCode().hashCode()))){
             String getPriceNow = getPriceNow(dianJiZhangFu.getShare().getCode());
+            dianJiZhangFu.getShare().setNowPrice(Double.parseDouble(getPriceNow));
             insertInto(dianJiZhangFu.getShare());
             System.out.println("有人点击查看页面了 code为"+dianJiZhangFu.getShare());
             bitset.clear(Math.abs(dianJiZhangFu.getShare().getCode().hashCode()));
         }else {
+            if (shareList.size()==0) return;
             Share share = shareList.get(i);
             i = (i+1)%shareList.size();
             if (bitset.get(Math.abs(share.getCode().hashCode()))){
                 String getPriceNow = getPriceNow(share.getCode());
+                share.setNowPrice(Double.parseDouble(getPriceNow));
                 insertInto(share);
                 bitset.clear(Math.abs(share.getCode().hashCode()));
             }
@@ -58,7 +67,7 @@ public class GenXinJob {
     }
 
     private void insertInto(Share share) {
-        System.out.println(share.getCode()+"修改了当前价格");
+        System.out.println(share.getCode()+"修改了当前价格 价格为" +share.getNowPrice());
         shareService.updateSharePrice(share);
     }
 

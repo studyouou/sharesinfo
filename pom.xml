@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>sharesinfo</name>
     <description>Demo project for Spring Boot</description>
-
+    <packaging>jar</packaging>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -90,6 +90,7 @@
     </dependencies>
 
     <build>
+        <finalName>shareinfo</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory><!--java文件的路径-->
@@ -111,6 +112,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+
         </plugins>
     </build>
 

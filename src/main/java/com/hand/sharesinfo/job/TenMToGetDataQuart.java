@@ -36,7 +36,7 @@ public class TenMToGetDataQuart {
     public SchedulerFactoryBean getSchFactoryBean(Trigger simpleTrigger){
         SchedulerFactoryBean bean = new SchedulerFactoryBean();
         bean.setOverwriteExistingJobs(true);
-        bean.setStartupDelay(10);
+        bean.setStartupDelay(0);
         bean.setTriggers(simpleTrigger);
         return bean;
     }

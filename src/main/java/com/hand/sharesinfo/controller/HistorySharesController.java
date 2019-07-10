@@ -5,7 +5,7 @@ import com.hand.sharesinfo.model.Page;
 import com.hand.sharesinfo.model.Share;
 import com.hand.sharesinfo.model.ShareHistory;
 import com.hand.sharesinfo.service.impl.ShareHistoryServiceImpl;
-import com.hand.sharesinfo.util.DianJiZhangFu;
+import com.hand.sharesinfo.toolcomponent.DianJiZhangFu;
 import com.hand.sharesinfo.util.PageUtil;
 import com.hand.sharesinfo.util.YeShuUtil;
 import org.springframework.beans.factory.annotation.Autowired;

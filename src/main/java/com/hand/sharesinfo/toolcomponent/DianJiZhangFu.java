@@ -1,4 +1,4 @@
-package com.hand.sharesinfo.util;
+package com.hand.sharesinfo.toolcomponent;
 
 import com.hand.sharesinfo.model.Share;
 import org.springframework.stereotype.Component;
