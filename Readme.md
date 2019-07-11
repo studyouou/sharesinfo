@@ -87,7 +87,7 @@ COPY ./shareinfo.jar .
 COPY ./wait-for-it.sh .
 RUN chmod 777 ./wait-for-it.sh
 EXPOSE 8080
-ENTRYPOINT ["./wait-for-it.sh", "192.168.43.201:3307", "--", "java", "-jar","./shareinfo.jar"]
+ENTRYPOINT ["./wait-for-it.sh", "192.168.43.201:3306", "--", "java", "-jar","./shareinfo.jar"]
 ```
 3. 下载[wait-for-it.sh](https://github.com/vishnubob/wait-for-it)到本目录
 4. 本目录下创建一个mysql/mysql目录，自己创建一个mysql镜像，在初始化时创建shares库
