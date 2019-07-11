@@ -34,6 +34,7 @@ public class HistorySharesController {
         Share share = new Share();
         share.setCode(code);
         dianJiZhangFu.setShare(share);
+        System.out.println(dianJiZhangFu.getShare().getCode());
         return tianZhuan(request,1,code,hangye);
     }
 

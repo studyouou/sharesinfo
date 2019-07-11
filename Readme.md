@@ -129,6 +129,7 @@ docker-compose up
 图片如下
 ![启动界面](https://github.com/studyouou/markdown/blob/master/1562749281(1).png)
 8. 可直接去我的dockerhub上下载镜像，[我的dockerhub的shares地址](https://cloud.docker.com/repository/docker/304489914/share_info)，[我的dockerhub的mysql地址](https://cloud.docker.com/repository/docker/304489914/shares_mysql)但是需要先启动mysql镜像，再启动shares镜像(注意mysql密码和ip及端口需要与自己代码对应)
+9. 第一次执行时，由于数据量过大，可下载部分数据后关掉docker然后重启，将不再进行下载
 # 项目效果   
 ![首页](https://github.com/studyouou/markdown/blob/master/1562518516(1).png) 
 ![30天涨幅超过5%页面](https://github.com/studyouou/markdown/blob/master/1562518575(1).png) 
