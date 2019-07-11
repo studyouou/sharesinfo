@@ -26,7 +26,7 @@ public class DiaoYongApp {
     //行业列表
     static List<String> hangye = new ArrayList<String>();
 
-    static BufferedWriter fw = null;
+//    static BufferedWriter fw = null;
 
     static ThreadLocal<Statement> threadLocal = new ThreadLocal<Statement>();
 
@@ -34,7 +34,7 @@ public class DiaoYongApp {
 
     public void downLoad() throws IOException, SQLException {
         System.out.println("开始更新下载数据入库，再次过程可能需要几分钟哟");
-        fw = new BufferedWriter(new FileWriter("d:\\handdata\\shares.txt"));
+//        fw = new BufferedWriter(new FileWriter("d:\\handdata\\shares.txt"));
         //获取代理ip
 //        ipAdds = new ProxyIP().getIpAddrs(5);
         String sql = "create table shares(code varchar(20) primary key,hangyecode varchar(20)" +
@@ -47,7 +47,7 @@ public class DiaoYongApp {
         //获取到每个行业的股票code
         getCodeListAndDown(url_list);
 
-        fw.close();
+//        fw.close();
     }
 
     private static void createTables(List<String> url_list) throws SQLException {
@@ -267,11 +267,11 @@ public class DiaoYongApp {
                             append("收盘价:").append(trade).append("               ").
                             append(name);
 
-                    fw.write(writeToFile.toString(),0,writeToFile.toString().length());
+//                    fw.write(writeToFile.toString(),0,writeToFile.toString().length());
                     //有利于清理掉json这个大对象
                     jsonO=null;
-                    fw.newLine();
-                    fw.flush();
+//                    fw.newLine();
+//                    fw.flush();
                 }
             }
             insertData(null,null,true);

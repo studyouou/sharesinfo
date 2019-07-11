@@ -2,6 +2,7 @@ package com.hand.sharesinfo.controller;
 
 import ch.qos.logback.core.util.FileUtil;
 import com.hand.sharesinfo.datadownload.DiaoYongApp;
+import com.hand.sharesinfo.exceptions.DownLoadException;
 import com.hand.sharesinfo.toolcomponent.DownLoadCishu;
 import com.hand.sharesinfo.util.ThreadPoolUtil;
 import org.apache.commons.io.FileUtils;
@@ -34,14 +35,15 @@ public class DownLoadHistoryController {
 
     @RequestMapping("/download")
     public ResponseEntity<byte[]> begeinDownload(HttpServletRequest request) throws IOException {
-        String path = "D:\\handdata\\shares.txt";
-        String fileName = "股票数据.txt";
-        InputStream in = request.getInputStream();
-        HttpHeaders headers = new HttpHeaders();
-        File file = new File(path);
-        headers.setContentDispositionFormData("Content-Disposition","attchement;filename="+fileName);
-        ResponseEntity<byte[]> entity = new ResponseEntity<>(FileUtils.readFileToByteArray(file),headers,HttpStatus.OK);
-        return entity;
+//        String path = "D:\\handdata\\shares.txt";
+//        String fileName = "股票数据.txt";
+//        InputStream in = request.getInputStream();
+//        HttpHeaders headers = new HttpHeaders();
+//        File file = new File(path);
+//        headers.setContentDispositionFormData("Content-Disposition","attchement;filename="+fileName);
+//        ResponseEntity<byte[]> entity = new ResponseEntity<>(FileUtils.readFileToByteArray(file),headers,HttpStatus.OK);
+//        return entity;
+        throw new DownLoadException("该功能文件在本地，所以未实现");
     }
 
 }
